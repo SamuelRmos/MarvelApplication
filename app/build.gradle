@@ -6,7 +6,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "29.0.1"
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.example.desafio_android_samuel_ramos"
@@ -20,15 +20,22 @@ android {
     buildTypes {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        def marvelApiKey = properties.getProperty("marvel_api_key", "")
+        def marvelApiKey = properties.getProperty("apikey", "")
+        def hashKey = properties.getProperty("hash", "")
 
         debug {
             buildConfigField 'String', "MARVEL_API_KEY", marvelApiKey
-            resValue 'string',"api_key", marvelApiKey
+            resValue 'string', "apikey", marvelApiKey
+
+            buildConfigField 'String', "HASH_KEY", hashKey
+            resValue 'string', "hash", hashKey
         }
         release {
             buildConfigField 'String', "MARVEL_API_KEY", marvelApiKey
-            resValue 'string', "api_key", marvelApiKey
+            resValue 'string', "apikey", marvelApiKey
+
+            buildConfigField 'String', "HASH_KEY", hashKey
+            resValue 'string', "hash", hashKey
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -47,14 +54,14 @@ android {
 
 dependencies {
 
-    def moshiVersion="1.8.0"
+    def moshiVersion = "1.8.0"
     def glideVersion = '4.11.0'
     def navigationVersion = '2.3.0-alpha04'
     def retrofit2_version = "2.5.0"
     def okhttp3_version = "3.12.0"
     def kotlinCoroutineVersion = "1.0.1"
     def materialDesign = "1.1.0"
-    def liveData="2.2.0"
+    def liveData = "2.2.0"
 
     //Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"

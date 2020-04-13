@@ -4,9 +4,14 @@ data class Characters(
     val id: Int,
     val name: String,
     val description: String,
-    val thumbnail: List<String>
+    val thumbnail: Thumbnail
 )
 
-data class CharactersResponse(
-    val results: List<Characters>
+data class Thumbnail(
+    val path: String,
+    val extension: String
 )
+
+object CharacterData {
+    var character: Characters? = null
+}

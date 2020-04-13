@@ -13,7 +13,6 @@ object RetrofitFactory {
     private val authInterceptor = Interceptor { chain ->
         val  newUrl = chain.request().url()
             .newBuilder()
-            .addQueryParameter("api_key", Constants.marvelApiKey)
             .build()
 
         val newRequest = chain.request()
