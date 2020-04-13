@@ -12,7 +12,7 @@ interface MarvelApi {
 
     @GET("v1/public/characters")
     fun getCharacter(
-        @Query("ts") ts: Int,
+        @Query("ts") ts: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String
     ): Deferred<Response<DataResponse>>
@@ -20,7 +20,7 @@ interface MarvelApi {
     @GET("/v1/public/characters/{characterId}/comics")
     fun getComics(
         @Path("characterId") characterId: Int,
-        @Query("ts") ts: Int,
+        @Query("ts") ts: String,
         @Query("apikey") apikey: String,
         @Query("hash") hash: String
     ): Deferred<Response<ResponseComics>>

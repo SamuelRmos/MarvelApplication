@@ -4,7 +4,7 @@ import com.example.desafio_android_samuel_ramos.BuildConfig
 
 
 object Constants {
-    var ts = 1
+    var ts = BuildConfig.TS
     var marvelApiKey = BuildConfig.MARVEL_API_KEY
     var hashKey = BuildConfig.HASH_KEY
     var baseUrl = "https://gateway.marvel.com/"
