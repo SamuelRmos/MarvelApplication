@@ -20,7 +20,3 @@ object Comic {
     var prices: String = " "
     var thumbnail: Thumbnail? = null
 }
-
-object ComicList {
-    var comicList: MutableList<Comics>? = null
-}

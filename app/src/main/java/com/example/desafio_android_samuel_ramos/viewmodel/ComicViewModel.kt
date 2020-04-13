@@ -44,7 +44,7 @@ class ComicViewModel : ViewModel() {
                     }
                 }
             }
-        } else ComicList.comicList = comics
+        }
         return Comic
     }
 
