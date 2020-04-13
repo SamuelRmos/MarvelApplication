@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.desafio_android_samuel_ramos.data.Comic
-import com.example.desafio_android_samuel_ramos.data.ComicList
 import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
 import com.example.desafio_android_samuel_ramos.util.hide
 import com.example.desafio_android_samuel_ramos.util.show

@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.desafio_android_samuel_ramos.data.Comic
-import com.example.desafio_android_samuel_ramos.data.ComicList
 import com.example.desafio_android_samuel_ramos.data.Comics
 import com.example.desafio_android_samuel_ramos.repository.CharacterRepository
 import com.example.desafio_android_samuel_ramos.service.MarvelApi
@@ -39,7 +38,6 @@ class ComicViewModel : ViewModel() {
                 for (element in item.prices) {
                     if (element.price >= price) {
                         price = element.price
-
                         setComic(item, price)
                     }
                 }
