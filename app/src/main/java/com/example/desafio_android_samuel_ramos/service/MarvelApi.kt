@@ -11,17 +11,9 @@ import retrofit2.http.Query
 interface MarvelApi {
 
     @GET("v1/public/characters")
-    fun getCharacter(
-        @Query("ts") ts: String,
-        @Query("apikey") apikey: String,
-        @Query("hash") hash: String
-    ): Deferred<Response<DataResponse>>
+    fun getCharacter(): Deferred<Response<DataResponse>>
 
     @GET("/v1/public/characters/{characterId}/comics")
-    fun getComics(
-        @Path("characterId") characterId: Int,
-        @Query("ts") ts: String,
-        @Query("apikey") apikey: String,
-        @Query("hash") hash: String
-    ): Deferred<Response<ResponseComics>>
+    fun getComics(@Path("characterId") characterId: Int):
+            Deferred<Response<ResponseComics>>
 }

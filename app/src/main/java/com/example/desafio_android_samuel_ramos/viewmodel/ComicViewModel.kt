@@ -19,14 +19,11 @@ class ComicViewModel : ViewModel() {
     private val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Default
     val comicLiveData = MutableLiveData<Comic>()
-    private val marvelApi: MarvelApi = RetrofitFactory
-        .retrofit(Constants.baseUrl)
-        .create(MarvelApi::class.java)
 
     fun fetchComics() {
         CoroutineScope(coroutineContext).launch {
             comicLiveData.postValue(
-                dataComic(CharacterRepository(marvelApi).getComics())
+                dataComic(CharacterRepository().getComics())
             )
         }
     }

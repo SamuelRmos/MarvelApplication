@@ -17,20 +17,16 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-class CharacterDetailsViewModel: ViewModel() {
+class CharacterDetailsViewModel : ViewModel() {
 
     private val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Default
     val characterLiveData = MutableLiveData<MutableList<Characters>>()
 
-    private val marvelApi: MarvelApi = RetrofitFactory
-        .retrofit(Constants.baseUrl)
-        .create(MarvelApi::class.java)
-
     fun fetchCharacters() {
         CoroutineScope(coroutineContext).launch {
             characterLiveData.postValue(
-                CharacterRepository(marvelApi).getCharacter()
+                CharacterRepository().getCharacter()
             )
         }
     }

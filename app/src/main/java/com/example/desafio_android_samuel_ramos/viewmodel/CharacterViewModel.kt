@@ -15,20 +15,15 @@ import com.example.desafio_android_samuel_ramos.util.Constants
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class CharacterViewModel() : ViewModel() {
-
+class CharacterViewModel : ViewModel() {
     private val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Default
     val characterLiveData = MutableLiveData<MutableList<Characters>>()
 
-    private val marvelApi: MarvelApi = RetrofitFactory
-        .retrofit(Constants.baseUrl)
-        .create(MarvelApi::class.java)
-
     fun fetchCharacters() {
         CoroutineScope(coroutineContext).launch {
             characterLiveData.postValue(
-                CharacterRepository(marvelApi).getCharacter()
+                CharacterRepository().getCharacter()
             )
         }
     }
