@@ -7,14 +7,11 @@ import androidx.navigation.findNavController
 import com.example.desafio_android_samuel_ramos.data.Comic
 import com.example.desafio_android_samuel_ramos.data.Comics
 import com.example.desafio_android_samuel_ramos.repository.CharacterRepository
-import com.example.desafio_android_samuel_ramos.service.MarvelApi
-import com.example.desafio_android_samuel_ramos.service.RetrofitFactory
 import com.example.desafio_android_samuel_ramos.ui.ComicFragmentDirections
-import com.example.desafio_android_samuel_ramos.util.Constants
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class ComicViewModel : ViewModel() {
+class ComicViewModel(private val characterRepository: CharacterRepository) : ViewModel() {
 
     private val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Default
@@ -23,7 +20,7 @@ class ComicViewModel : ViewModel() {
     fun fetchComics() {
         CoroutineScope(coroutineContext).launch {
             comicLiveData.postValue(
-                dataComic(CharacterRepository().getComics())
+                dataComic(characterRepository.getComics())
             )
         }
     }

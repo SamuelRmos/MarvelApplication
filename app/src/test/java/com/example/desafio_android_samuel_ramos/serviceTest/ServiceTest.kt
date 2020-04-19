@@ -2,10 +2,6 @@ package com.example.desafio_android_samuel_ramos.serviceTest
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.example.desafio_android_samuel_ramos.repository.CharacterRepository
-import com.example.desafio_android_samuel_ramos.service.MarvelApi
-import com.example.desafio_android_samuel_ramos.service.RetrofitFactory
-import com.example.desafio_android_samuel_ramos.util.Constants
-import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel
 import junit.framework.Assert.assertNotNull
 import kotlinx.coroutines.runBlocking
 import org.junit.Before

@@ -13,18 +13,25 @@ import com.example.desafio_android_samuel_ramos.data.Comic
 import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
 import com.example.desafio_android_samuel_ramos.util.hide
 import com.example.desafio_android_samuel_ramos.util.show
+import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 import com.example.desafio_android_samuel_ramos.viewmodel.ComicViewModel
 
 class ComicFragment : Fragment() {
 
     private lateinit var viewModel: ComicViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val characterViewModelFactory = CharacterViewModelFactory()
+        viewModel = ViewModelProvider(this, characterViewModelFactory)
+            .get(ComicViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(ComicViewModel::class.java)
         val binding = ComicFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
         subscribeUi(binding)

@@ -12,18 +12,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel
 import com.example.desafio_android_samuel_ramos.databinding.CharacterFragmentBinding
 import com.example.desafio_android_samuel_ramos.util.hide
+import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 
 class CharacterFragment : Fragment() {
 
     private lateinit var viewModel: CharacterViewModel
     private var gridLayoutManager: GridLayoutManager? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val characterViewModelFactory = CharacterViewModelFactory()
+        viewModel = ViewModelProvider(this, characterViewModelFactory)
+            .get(CharacterViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(CharacterViewModel::class.java)
 
         val binding = CharacterFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root

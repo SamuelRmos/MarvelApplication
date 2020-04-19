@@ -15,18 +15,25 @@ import com.example.desafio_android_samuel_ramos.util.hide
 import com.example.desafio_android_samuel_ramos.util.show
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterDetailsViewModel
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel
+import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 
 class CharacterDetailsFragment : Fragment() {
 
     private lateinit var viewmodel: CharacterDetailsViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val characterViewModelFactory = CharacterViewModelFactory()
+        viewmodel = ViewModelProvider(this, characterViewModelFactory)
+            .get(CharacterDetailsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        viewmodel = ViewModelProvider(this).get(CharacterDetailsViewModel::class.java)
         val binding = CharacterDetailsFragmentBinding.inflate(
             inflater, container,
             false
