@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class CharacterViewModel(private var characterRepository: CharacterRepository) : ViewModel() {
+
     private val coroutineContext: CoroutineContext
         get() = Job() + Dispatchers.Default
     val characterLiveData = MutableLiveData<MutableList<Characters>>()

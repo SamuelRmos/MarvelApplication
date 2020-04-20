@@ -35,7 +35,7 @@
             android:id="@+id/imageView"
             android:layout_width="350dp"
             android:layout_height="300dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="6dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,12 @@
             android:id="@+id/tvtitlecomic"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@{comic.title}"
-            android:textSize="15sp"
-            android:textColor="@color/colorText"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/roboto"
             android:gravity="center"
+            android:text="@{comic.title}"
+            android:textColor="@color/colorText"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,47 +75,48 @@
             android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="15dp"
             android:text="@string/price"
             android:textColor="@color/colorText"
             android:textSize="15sp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnHome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.437"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvdescriptioncomic"
-            app:layout_constraintVertical_bias="0.064" />
+            app:layout_constraintVertical_bias="0.015" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginBottom="15dp"
             android:gravity="start"
             android:text="@{comic.prices}"
             android:textColor="@color/colorText"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnHome"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/tvprice"
             app:layout_constraintTop_toBottomOf="@+id/tvdescriptioncomic"
-            app:layout_constraintVertical_bias="0.064" />
+            app:layout_constraintVertical_bias="0.015" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnHome"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:text="@string/home"
-            android:visibility="gone"
+            android:layout_marginBottom="4dp"
             android:onClick="@{clickListener}"
+            android:text="@string/home"
+            android:visibility="visible"
             app:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintVertical_bias="0.691" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

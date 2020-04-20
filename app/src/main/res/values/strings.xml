@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">desafio-android-samuel-ramos</string>
+    <string name="app_name"> Marvel </string>
     <string name="see_hqs">See HQ</string>
     <string name="price">Price: $</string>
     <string name="home">Home</string>
+    <string name="usuario">User</string>
+    <string name="user">User</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
