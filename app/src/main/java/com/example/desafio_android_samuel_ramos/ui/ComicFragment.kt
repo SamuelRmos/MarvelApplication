@@ -42,19 +42,17 @@ class ComicFragment : Fragment() {
         viewModel.fetchComics()
         viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
             it.let {
-                bind(binding, it, viewModel.createOnClickListener())
+                bind(binding, it)
             }
         })
     }
 
-    private fun bind(binding: ComicFragmentBinding, item: Comic, listener: View.OnClickListener) {
+    private fun bind(binding: ComicFragmentBinding, item: Comic) {
         binding.apply {
             comic = item
-            clickListener = listener
             executePendingBindings()
         }
         binding.progressBar.hide()
-        binding.btnHome.show()
         binding.tvprice.show()
     }
 
