@@ -4,8 +4,8 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import com.example.desafio_android_samuel_ramos.data.Comic
-import com.example.desafio_android_samuel_ramos.data.Comics
+import com.example.desafio_android_samuel_ramos.model.Comic
+import com.example.desafio_android_samuel_ramos.model.Comics
 import com.example.desafio_android_samuel_ramos.repository.CharacterRepository
 import com.example.desafio_android_samuel_ramos.ui.ComicFragmentDirections
 import kotlinx.coroutines.*

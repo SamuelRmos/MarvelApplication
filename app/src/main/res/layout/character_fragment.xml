@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel" />
+    </data>
 
     <FrameLayout
         android:id="@+id/characterFragment"
@@ -13,8 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            android:scrollbars="vertical"
-            tools:contex="ui.MainActivity"
+            android:padding="4dp"
+            app:adapterCharacterList="@{viewModel.characterLiveData}"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
             tools:listitem="@layout/item_layout" />
 
         <ProgressBar

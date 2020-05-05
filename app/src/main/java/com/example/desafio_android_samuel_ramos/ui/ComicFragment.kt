@@ -9,10 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.desafio_android_samuel_ramos.data.Comic
+import com.example.desafio_android_samuel_ramos.model.Comic
 import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
-import com.example.desafio_android_samuel_ramos.util.hide
-import com.example.desafio_android_samuel_ramos.util.show
+import com.example.desafio_android_samuel_ramos.extensions.hide
+import com.example.desafio_android_samuel_ramos.extensions.show
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 import com.example.desafio_android_samuel_ramos.viewmodel.ComicViewModel
 
@@ -41,9 +41,7 @@ class ComicFragment : Fragment() {
     private fun subscribeUi(binding: ComicFragmentBinding) {
         viewModel.fetchComics()
         viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
-            it.let {
-                bind(binding, it)
-            }
+            bind(binding, it)
         })
     }
 

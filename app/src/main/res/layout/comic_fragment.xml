@@ -9,7 +9,7 @@
             type="android.view.View.OnClickListener" />
         <variable
             name="comic"
-            type="com.example.desafio_android_samuel_ramos.data.Comic" />
+            type="com.example.desafio_android_samuel_ramos.model.Comic" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

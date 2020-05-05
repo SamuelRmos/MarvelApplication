@@ -7,14 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.desafio_android_samuel_ramos.data.CharacterData
-import com.example.desafio_android_samuel_ramos.data.Characters
+import com.example.desafio_android_samuel_ramos.model.CharacterData
+import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.databinding.CharacterDetailsFragmentBinding
-import com.example.desafio_android_samuel_ramos.util.hide
-import com.example.desafio_android_samuel_ramos.util.show
+import com.example.desafio_android_samuel_ramos.extensions.hide
+import com.example.desafio_android_samuel_ramos.extensions.show
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterDetailsViewModel
-import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 
 class CharacterDetailsFragment : Fragment() {
@@ -44,16 +42,12 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     private fun subscribeUi(binding: CharacterDetailsFragmentBinding) {
-        viewmodel.fetchCharacters()
-        viewmodel.characterLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                bind(binding, it.get(arguments?.let { it1 ->
-                    CharacterDetailsFragmentArgs.fromBundle(it1).position
-                }!!), viewmodel.createOnClickListener())
-                binding.progressBar.hide()
-                binding.btnHQ.show()
-            }
+        val character = viewmodel.getCharacter(arguments.let {
+            CharacterDetailsFragmentArgs.fromBundle(it!!).characterId
         })
+        bind(binding, character, viewmodel.createOnClickListener())
+        binding.progressBar.hide()
+        binding.btnHQ.show()
     }
 
     private fun bind(

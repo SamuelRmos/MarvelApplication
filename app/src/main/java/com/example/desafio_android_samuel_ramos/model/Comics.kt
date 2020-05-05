@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.data
+package com.example.desafio_android_samuel_ramos.model
 
 data class Comics(
     val id: Int,

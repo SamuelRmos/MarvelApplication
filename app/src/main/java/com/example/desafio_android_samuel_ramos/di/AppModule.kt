@@ -1,5 +1,6 @@
-package com.example.desafio_android_samuel_ramos
+package com.example.desafio_android_samuel_ramos.di
 
+import com.example.desafio_android_samuel_ramos.CharacterApplication
 import dagger.Module
 import dagger.Provides
 

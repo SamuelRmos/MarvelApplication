@@ -7,16 +7,26 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.desafio_android_samuel_ramos.data.Characters
+import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.databinding.ItemLayoutBinding
 
-class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(DiffCallback()) {
+class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(
+    DiffCallback()
+) {
+    private val items = mutableListOf<Characters>()
+
     override fun onBindViewHolder(holder: CharacterAdapter.ViewHolder, position: Int) {
-        val character = getItem(position)
+        val character = items[position]
         holder.apply {
-            bind(createOnClickListener(position), character)
-            itemView.tag = character
+            bind(createOnClickListener(character.id), character)
+            itemView.tag = position
         }
+    }
+
+    fun updateCharactersList(characters: List<Characters>){
+        items.clear()
+        items.addAll(characters)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,10 +37,10 @@ class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(Di
         )
     }
 
-    private fun createOnClickListener(position: Int): View.OnClickListener {
+    private fun createOnClickListener(characterId: Int): View.OnClickListener {
         return View.OnClickListener {
             val direction = CharacterFragmentDirections
-                .actionCharacterFragmentToCharacterDetailsFragment(position)
+                .actionCharacterFragmentToCharacterDetailsFragment(characterId)
             it.findNavController().navigate(direction)
         }
     }

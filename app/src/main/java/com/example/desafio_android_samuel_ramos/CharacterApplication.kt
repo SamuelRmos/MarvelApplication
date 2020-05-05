@@ -2,9 +2,7 @@ package com.example.desafio_android_samuel_ramos
 
 import android.app.Application
 import android.content.Context
-import com.example.desafio_android_samuel_ramos.di.ApiComponent
-import com.example.desafio_android_samuel_ramos.di.ApiModule
-import com.example.desafio_android_samuel_ramos.di.DaggerApiComponent
+import com.example.desafio_android_samuel_ramos.di.*
 import com.example.desafio_android_samuel_ramos.util.Constants
 
 class CharacterApplication : Application() {
@@ -23,6 +21,9 @@ class CharacterApplication : Application() {
         apiComponent = DaggerApiComponent
             .builder()
             .apiModule(ApiModule(Constants.baseUrl))
+            .persistenceModule(PersistenceModule())
+            .detailRepositoryModule(DetailRepositoryModule())
+            .appModule(AppModule(this))
             .build()
         return apiComponent
     }

@@ -1,10 +1,9 @@
 package com.example.desafio_android_samuel_ramos.repository
 
 import com.example.desafio_android_samuel_ramos.CharacterApplication
-import com.example.desafio_android_samuel_ramos.data.*
+import com.example.desafio_android_samuel_ramos.model.*
 import com.example.desafio_android_samuel_ramos.di.ApiComponent
 import com.example.desafio_android_samuel_ramos.service.MarvelApi
-import com.example.desafio_android_samuel_ramos.util.Constants
 import retrofit2.Retrofit
 import javax.inject.Inject
 

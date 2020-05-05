@@ -9,4 +9,5 @@ object Constants {
     var hashKey = BuildConfig.HASH_KEY
     var baseUrl = "https://gateway.marvel.com/"
     var sizeImage = "/portrait_incredible."
+    var sizeWide = "/detail."
 }

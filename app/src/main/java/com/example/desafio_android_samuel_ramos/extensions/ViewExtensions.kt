@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.util
+package com.example.desafio_android_samuel_ramos.extensions
 
 import android.view.View
 import android.widget.ProgressBar

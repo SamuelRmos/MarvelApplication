@@ -17,7 +17,7 @@ import javax.inject.Singleton
 class ApiModule constructor(private var baseURL: String) {
 
     private val authInterceptor = Interceptor { chain ->
-        val  newUrl = chain.request().url()
+        val  newUrl = chain.request().url
             .newBuilder()
             .addQueryParameter("ts", Constants.ts)
             .addQueryParameter("apikey", Constants.marvelApiKey)
