@@ -19,7 +19,7 @@ class CharacterViewModel(
 ) : ViewModel() {
     val characterLiveData = fetchCharacters()
 
-    fun fetchCharacters(): MutableLiveData<MutableList<Characters>> {
+    private fun fetchCharacters(): MutableLiveData<MutableList<Characters>> {
         val characterList = MutableLiveData<MutableList<Characters>>()
         val characters = characterDao.getCharacterList()
         val isConnected = isNetworkAvailable(characterApplication)

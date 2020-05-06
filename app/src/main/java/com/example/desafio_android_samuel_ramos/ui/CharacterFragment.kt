@@ -13,13 +13,12 @@ import com.example.desafio_android_samuel_ramos.extensions.hide
 import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
 
 class CharacterFragment : Fragment() {
-
     private lateinit var characterViewModel: CharacterViewModel
+    private lateinit var binding: CharacterFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val characterViewModelFactory = CharacterViewModelFactory()
-        characterViewModel = ViewModelProvider(this, characterViewModelFactory)
+        characterViewModel = ViewModelProvider(this, CharacterViewModelFactory())
             .get(CharacterViewModel::class.java)
     }
 
@@ -29,27 +28,26 @@ class CharacterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val binding = CharacterFragmentBinding.inflate(inflater, container, false)
-            .apply {
-                viewModel = characterViewModel
-            }
+        binding = CharacterFragmentBinding.inflate(
+            inflater,
+            container,
+            false
+        )
+        binding.apply { viewModel = characterViewModel }
         context ?: return binding.root
 
         val adapter = CharacterAdapter()
-
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
-        subscribeUi(binding, adapter)
+        subscribeUi(adapter)
         setHasOptionsMenu(true)
         return binding.root
     }
 
-    private fun subscribeUi(binding: CharacterFragmentBinding, adapter: CharacterAdapter) {
+    private fun subscribeUi(adapter: CharacterAdapter) {
         characterViewModel.characterLiveData.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                adapter.submitList(it)
-                binding.progressBar.hide()
-            }
+            adapter.submitList(it)
+            binding.progressBar.hide()
         })
     }
 }

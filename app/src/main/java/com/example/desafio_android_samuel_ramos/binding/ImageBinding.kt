@@ -18,6 +18,7 @@ object ImageBinding {
                 .load(it.thumbnail?.path
                         + Constants.sizeImage
                         + it.thumbnail?.extension)
+                .centerCrop()
                 .into(this)
         }
     }
@@ -30,6 +31,7 @@ object ImageBinding {
                 .load(it.thumbnail?.path
                         + Constants.sizeWide
                         + it.thumbnail?.extension)
+                .centerCrop()
                 .into(this)
         }
     }

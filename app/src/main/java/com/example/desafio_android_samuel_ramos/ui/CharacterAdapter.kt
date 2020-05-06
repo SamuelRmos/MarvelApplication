@@ -15,7 +15,15 @@ class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(
 ) {
     private val items = mutableListOf<Characters>()
 
-    override fun onBindViewHolder(holder: CharacterAdapter.ViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder(
+            ItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context), parent, false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character = items[position]
         holder.apply {
             bind(createOnClickListener(character.id), character)
@@ -23,18 +31,10 @@ class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(
         }
     }
 
-    fun updateCharactersList(characters: List<Characters>){
+    fun updateCharactersList(characters: List<Characters>) {
         items.clear()
         items.addAll(characters)
         notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            ItemLayoutBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
-            )
-        )
     }
 
     private fun createOnClickListener(characterId: Int): View.OnClickListener {
