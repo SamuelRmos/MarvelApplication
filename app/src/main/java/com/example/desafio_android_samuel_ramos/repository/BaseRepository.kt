@@ -3,7 +3,7 @@ package com.example.desafio_android_samuel_ramos.repository
 import android.util.Log
 import retrofit2.Response
 import java.io.IOException
-import com.example.desafio_android_samuel_ramos.service.Result
+import com.example.desafio_android_samuel_ramos.network.Result
 
 open class BaseRepository {
 

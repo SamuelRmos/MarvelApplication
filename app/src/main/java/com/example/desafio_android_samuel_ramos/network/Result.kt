@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.service
+package com.example.desafio_android_samuel_ramos.network
 
 import java.lang.Exception
 

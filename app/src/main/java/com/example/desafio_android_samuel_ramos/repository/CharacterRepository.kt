@@ -1,40 +1,44 @@
 package com.example.desafio_android_samuel_ramos.repository
 
-import com.example.desafio_android_samuel_ramos.CharacterApplication
 import com.example.desafio_android_samuel_ramos.model.*
-import com.example.desafio_android_samuel_ramos.di.ApiComponent
-import com.example.desafio_android_samuel_ramos.service.MarvelApi
-import retrofit2.Retrofit
-import javax.inject.Inject
+import com.example.desafio_android_samuel_ramos.network.MarvelApi
+import com.example.desafio_android_samuel_ramos.persistence.CharacterDao
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class CharacterRepository: BaseRepository() {
-    @Inject
-    lateinit var retrofit: Retrofit
+class CharacterRepository constructor(private val characterDao: CharacterDao) : BaseRepository(),
+    KoinComponent {
 
-    init {
-        val apiComponent: ApiComponent = CharacterApplication.apiComponent
-        apiComponent.inject(this)
+    private val api: MarvelApi by inject()
+
+    private val characterList = characterDao.getCharacterList()
+
+    suspend fun getCharacter() = when {
+        characterList.isEmpty() || characterList.size == 0 -> dataFetchLogic()
+
+        else -> characterDao.getCharacterList()
     }
-    suspend fun getCharacter(): MutableList<Characters>? {
 
-        val api: MarvelApi = retrofit.create(MarvelApi::class.java)
+    private suspend fun dataFetchLogic(): MutableList<Characters> {
 
         val characterResponse = safeApiCall(
             call = {
-                api.getCharacter().await()
+                api.getCharacterAsync().await()
             },
             errorMessage = "Error Fetching Characters Response"
         )
-        return characterResponse!!.data.results.toMutableList();
+
+        val dataReceived = characterResponse!!.data.results.toMutableList()
+        characterDao.insertCharacterList(dataReceived)
+
+        return dataReceived
     }
 
     suspend fun getComics(): MutableList<Comics>? {
 
-        val api: MarvelApi = retrofit.create(MarvelApi::class.java)
-
         val comicResponse = safeApiCall(
             call = {
-                api.getComics(CharacterData.character!!.id).await()
+                api.getComicsAsync(CharacterData.character!!.id).await()
             },
             errorMessage = "Error Fetching Characters Response"
         )

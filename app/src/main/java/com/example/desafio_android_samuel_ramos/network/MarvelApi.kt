@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.service
+package com.example.desafio_android_samuel_ramos.network
 
 import com.example.desafio_android_samuel_ramos.model.DataResponse
 import com.example.desafio_android_samuel_ramos.model.ResponseComics
@@ -10,9 +10,9 @@ import retrofit2.http.Path
 interface MarvelApi {
 
     @GET("v1/public/characters")
-    fun getCharacter(): Deferred<Response<DataResponse>>
+    fun getCharacterAsync(): Deferred<Response<DataResponse>>
 
     @GET("/v1/public/characters/{characterId}/comics")
-    fun getComics(@Path("characterId") characterId: Int):
+    fun getComicsAsync(@Path("characterId") characterId: Int):
             Deferred<Response<ResponseComics>>
 }

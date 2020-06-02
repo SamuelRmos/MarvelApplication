@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.ui
+package com.example.desafio_android_samuel_ramos.view.activity
 
 import android.content.Intent
 import android.os.Bundle

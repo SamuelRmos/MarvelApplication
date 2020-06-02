@@ -6,7 +6,8 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.model.Comic
-import com.example.desafio_android_samuel_ramos.util.Constants
+import com.example.desafio_android_samuel_ramos.util.sizeImage
+import com.example.desafio_android_samuel_ramos.util.sizeWide
 
 object ImageBinding {
 
@@ -16,7 +17,7 @@ object ImageBinding {
         image?.let {
             Glide.with(context)
                 .load(it.thumbnail?.path
-                        + Constants.sizeImage
+                        + sizeImage
                         + it.thumbnail?.extension)
                 .centerCrop()
                 .into(this)
@@ -29,7 +30,7 @@ object ImageBinding {
         image?.let {
             Glide.with(context)
                 .load(it.thumbnail?.path
-                        + Constants.sizeWide
+                        + sizeWide
                         + it.thumbnail?.extension)
                 .centerCrop()
                 .into(this)
@@ -42,7 +43,7 @@ object ImageBinding {
         image?.let {
             Glide.with(context)
                 .load(it.thumbnail!!.path
-                        + Constants.sizeImage
+                        + sizeImage
                         + it.thumbnail!!.extension)
                 .into(this)
         }

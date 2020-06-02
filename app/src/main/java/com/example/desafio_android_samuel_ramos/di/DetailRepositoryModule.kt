@@ -1,13 +1,10 @@
 package com.example.desafio_android_samuel_ramos.di
 
 import com.example.desafio_android_samuel_ramos.repository.DetailRepository
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import org.koin.dsl.module
 
-@Module
-class DetailRepositoryModule {
-    @Singleton
-    @Provides
-    fun provideDetailRepository(): DetailRepository = DetailRepository()
+val DetailRepositoryModule = module {
+    factory {
+        DetailRepository(get())
+    }
 }

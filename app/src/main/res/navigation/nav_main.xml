@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_main"
     app:startDestination="@id/characterFragment">
 
     <fragment
         android:id="@+id/characterFragment"
-        android:name="com.example.desafio_android_samuel_ramos.ui.CharacterFragment"
-        android:label="CharacterFragment" >
+        android:name="com.example.desafio_android_samuel_ramos.view.fragment.CharacterFragment"
+        android:label="CharacterFragment"
+        tools:layout="@layout/character_fragment">
         <action
             android:id="@+id/action_characterFragment_to_characterDetailsFragment"
             app:destination="@id/characterDetailsFragment"
@@ -20,8 +21,9 @@
 
     <fragment
         android:id="@+id/characterDetailsFragment"
-        android:name="com.example.desafio_android_samuel_ramos.ui.CharacterDetailsFragment"
-        android:label="CharacterDetailsFragment" >
+        android:name="com.example.desafio_android_samuel_ramos.view.fragment.CharacterDetailsFragment"
+        android:label="CharacterDetailsFragment"
+        tools:layout="@layout/character_details_fragment">
         <action
             android:id="@+id/action_characterDetailsFragment_to_characterFragment"
             app:destination="@id/characterFragment"
@@ -42,11 +44,9 @@
     </fragment>
     <fragment
         android:id="@+id/comicFragment"
-        android:name="com.example.desafio_android_samuel_ramos.ui.ComicFragment"
-        android:label="ComicFragment" >
-        <action
-            android:id="@+id/action_comicFragment_to_characterDetailsFragment"
-            app:destination="@id/characterDetailsFragment" />
+        android:name="com.example.desafio_android_samuel_ramos.view.fragment.ComicFragment"
+        android:label="ComicFragment"
+        tools:layout="@layout/comic_fragment">
         <action
             android:id="@+id/action_comicFragment_to_characterFragment"
             app:destination="@id/characterFragment"
@@ -55,4 +55,10 @@
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
+
+    <activity
+        android:id="@+id/splashActivity"
+        android:name="com.example.desafio_android_samuel_ramos.view.activity.SplashActivity"
+        android:label="SplashActivity"
+        tools:layout="@layout/splash_activity"/>
 </navigation>

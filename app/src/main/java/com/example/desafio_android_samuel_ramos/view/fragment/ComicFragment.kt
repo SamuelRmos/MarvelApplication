@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.ui
+package com.example.desafio_android_samuel_ramos.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.desafio_android_samuel_ramos.model.Comic
 import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
 import com.example.desafio_android_samuel_ramos.extensions.show
-import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
-import com.example.desafio_android_samuel_ramos.viewmodel.ComicViewModel
+import com.example.desafio_android_samuel_ramos.model.Comic
+import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
+import com.example.desafio_android_samuel_ramos.view.viewmodel.ComicViewModel
 
 class ComicFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.ui
+package com.example.desafio_android_samuel_ramos.view.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,18 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModel
+import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModel
 import com.example.desafio_android_samuel_ramos.databinding.CharacterFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
-import com.example.desafio_android_samuel_ramos.viewmodel.CharacterViewModelFactory
+import com.example.desafio_android_samuel_ramos.view.adapter.CharacterAdapter
+import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
+import kotlinx.coroutines.Dispatchers
 
 class CharacterFragment : Fragment() {
-    private lateinit var characterViewModel: CharacterViewModel
+
+    private val mViewModelFactory = CharacterViewModelFactory()
     private lateinit var binding: CharacterFragmentBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        characterViewModel = ViewModelProvider(this, CharacterViewModelFactory())
+    private val mViewModel: CharacterViewModel by lazy {
+        ViewModelProvider(this, mViewModelFactory)
             .get(CharacterViewModel::class.java)
     }
 
@@ -33,10 +35,10 @@ class CharacterFragment : Fragment() {
             container,
             false
         )
-        binding.apply { viewModel = characterViewModel }
         context ?: return binding.root
 
-        val adapter = CharacterAdapter()
+        val adapter =
+            CharacterAdapter()
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
         subscribeUi(adapter)
@@ -45,9 +47,9 @@ class CharacterFragment : Fragment() {
     }
 
     private fun subscribeUi(adapter: CharacterAdapter) {
-        characterViewModel.characterLiveData.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it)
-            binding.progressBar.hide()
-        })
+//        characterViewModel.characterLiveData.observe(viewLifecycleOwner, Observer {
+//            adapter.submitList(it)
+//            binding.progressBar.hide()
+//        })
     }
 }

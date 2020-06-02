@@ -1,4 +1,4 @@
-package com.example.desafio_android_samuel_ramos.ui
+package com.example.desafio_android_samuel_ramos.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.databinding.ItemLayoutBinding
+import com.example.desafio_android_samuel_ramos.view.fragment.CharacterFragmentDirections
 
 class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(
     DiffCallback()
@@ -39,8 +40,10 @@ class CharacterAdapter : ListAdapter<Characters, CharacterAdapter.ViewHolder>(
 
     private fun createOnClickListener(characterId: Int): View.OnClickListener {
         return View.OnClickListener {
-            val direction = CharacterFragmentDirections
-                .actionCharacterFragmentToCharacterDetailsFragment(characterId)
+            val direction =
+                CharacterFragmentDirections.actionCharacterFragmentToCharacterDetailsFragment(
+                    characterId
+                )
             it.findNavController().navigate(direction)
         }
     }
