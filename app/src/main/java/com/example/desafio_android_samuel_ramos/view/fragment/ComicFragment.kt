@@ -54,7 +54,7 @@ class ComicFragment : Fragment() {
         binding.tvprice.show()
     }
 
-    private fun backtoDetails() {
+    private fun backToDetails() {
         findNavController().navigate(
             ComicFragmentDirections.actionComicFragmentToCharacterFragment()
         )

@@ -1,11 +1,18 @@
 package com.example.desafio_android_samuel_ramos.view.fragment
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.desafio_android_samuel_ramos.base.LiveDataFetch
+import com.example.desafio_android_samuel_ramos.base.LiveDataWrapper
 import com.example.desafio_android_samuel_ramos.model.CharacterData
 import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.databinding.CharacterDetailsFragmentBinding
@@ -16,14 +23,24 @@ import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewMode
 
 class CharacterDetailsFragment : Fragment() {
 
-    private lateinit var viewmodel: CharacterDetailsViewModel
+    private val characterViewModelFactory = CharacterViewModelFactory()
+    private lateinit var binding: CharacterDetailsFragmentBinding
+
+    private val mViewModel: CharacterDetailsViewModel by lazy {
+        ViewModelProvider(this, characterViewModelFactory)
+            .get(CharacterDetailsViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val characterViewModelFactory = CharacterViewModelFactory()
-        viewmodel = ViewModelProvider(this, characterViewModelFactory)
-            .get(CharacterDetailsViewModel::class.java)
+        mViewModel.mDetailResponse.observe(this, mDataObserver)
+        mViewModel.mLoadingLiveData.observe(this, loadingObserver)
+        mViewModel.fetchData(arguments.let {
+            CharacterDetailsFragmentArgs.fromBundle(
+                it!!
+            ).characterId
+        })
     }
 
     override fun onCreateView(
@@ -31,28 +48,48 @@ class CharacterDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = CharacterDetailsFragmentBinding.inflate(
+
+        binding = CharacterDetailsFragmentBinding.inflate(
             inflater, container,
             false
         )
         context ?: return binding.root
-        subscribeUi(binding)
         return binding.root
     }
 
-    private fun subscribeUi(binding: CharacterDetailsFragmentBinding) {
-        val character = viewmodel.getCharacter(arguments.let {
-            CharacterDetailsFragmentArgs.fromBundle(
-                it!!
-            ).characterId
-        })
-        bind(binding, character, viewmodel.createOnClickListener())
-        binding.progressBar.hide()
-        binding.btnHQ.show()
+    private val mDataObserver = Observer<LiveDataFetch<Characters>> { result ->
+        when (result.responseStatus) {
+            LiveDataFetch.ResponseStatus.LOADING -> {
+
+            }
+            LiveDataFetch.ResponseStatus.ERROR -> {
+                Toast.makeText(activity, "Error in getting data", Toast.LENGTH_SHORT).show()
+            }
+            LiveDataFetch.ResponseStatus.SUCCESS -> {
+                bind(result.response?.value!!, mViewModel.createOnClickListener())
+            }
+        }
     }
 
+//    private fun processData() {
+//        val refresh = Handler(Looper.getMainLooper())
+//        refresh.post {
+//
+//        }
+//    }
+//
+//    private fun subscribeUi(binding: CharacterDetailsFragmentBinding) {
+////        val character = viewmodel.getCharacter(arguments.let {
+////            CharacterDetailsFragmentArgs.fromBundle(
+////                it!!
+////            ).characterId
+////        })
+////        bind(binding, character, viewmodel.createOnClickListener())
+////        binding.progressBar.hide()
+////        binding.btnHQ.show()
+//    }
+
     private fun bind(
-        binding: CharacterDetailsFragmentBinding,
         item: Characters,
         listener: View.OnClickListener
     ) {
@@ -62,5 +99,12 @@ class CharacterDetailsFragment : Fragment() {
             executePendingBindings()
         }
         CharacterData.character = item
+    }
+
+    private val loadingObserver = Observer<Boolean> { visible ->
+        when {
+            visible -> binding.progressBar.show()
+            else -> binding.progressBar.hide()
+        }
     }
 }

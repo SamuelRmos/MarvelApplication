@@ -17,16 +17,19 @@ class CharacterViewModel(
     private val job = SupervisorJob()
     private val mUiScope = CoroutineScope(mainDispatcher + job)
     private val mIoScope = CoroutineScope(ioDispatcher + job)
-    private val mLoadingLiveData = MutableLiveData<Boolean>()
 
+    val mLoadingLiveData = MutableLiveData<Boolean>()
     var mCharacterResponse = MutableLiveData<LiveDataWrapper<Characters>>()
 
     fun requestData() {
+
         if (mCharacterResponse.value == null) {
 
             mUiScope.launch {
+
                 mCharacterResponse.value = LiveDataWrapper.loading()
                 setLoadingVisibility(true)
+
                 try {
                     val data = mIoScope.async {
                         return@async characterRepository.getCharacter()

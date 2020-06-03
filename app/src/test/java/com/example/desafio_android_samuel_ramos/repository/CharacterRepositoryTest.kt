@@ -50,7 +50,7 @@ class CharacterRepositoryTest : BaseTest() {
         val dataReceived = sut.getCharacter()
 
         assertNotNull(dataReceived)
-        assertEquals(dataReceived?.get(0)!!.id, mId)
+        assertEquals(dataReceived[0].id, mId)
         assertEquals(dataReceived[0].name, mName)
         assertEquals(dataReceived[0].description, mDescription)
     }

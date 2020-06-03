@@ -23,7 +23,7 @@
         android:onClick="@{clickListener}"
         app:cardBackgroundColor="@color/background1"
         app:cardCornerRadius="8dp"
-        app:cardElevation="8dp">
+        app:cardElevation="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
