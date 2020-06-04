@@ -11,7 +11,9 @@ open class CharacterApplication : Application() {
         super.onCreate()
        startKoin {
            androidContext(this@CharacterApplication)
-           modules(appComponent)
+           modules(provideDependency())
        }
     }
+
+    open fun provideDependency() = appComponent
 }

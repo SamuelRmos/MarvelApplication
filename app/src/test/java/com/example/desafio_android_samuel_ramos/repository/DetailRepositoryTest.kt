@@ -2,10 +2,12 @@ package com.example.desafio_android_samuel_ramos.repository
 
 import com.example.desafio_android_samuel_ramos.persistence.CharacterDao
 import com.example.desafio_android_samuel_ramos.utils.MockTestUtil.mockDetails
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertNotNull
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,9 +34,9 @@ class DetailRepositoryTest {
     }
 
     @Test
-    fun `detailRepo getDetailData`() {
+    fun `detailRepo getDetailData`() = runBlocking {
 
-        every { mCharacterDao.getCharacter(1011334) } returns mockDetails()
+        coEvery { mCharacterDao.getCharacter(1011334) } returns mockDetails()
         sut = DetailRepository(mCharacterDao)
 
         val receivedData = sut.getCharacterById(1011334)

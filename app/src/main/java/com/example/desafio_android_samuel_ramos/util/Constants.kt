@@ -8,3 +8,4 @@ const val hashKey = BuildConfig.HASH_KEY
 const val baseUrl = "https://gateway.marvel.com/"
 const val sizeImage = "/portrait_incredible."
 const val sizeWide = "/detail."
+const val messageError = "Error in getting data"

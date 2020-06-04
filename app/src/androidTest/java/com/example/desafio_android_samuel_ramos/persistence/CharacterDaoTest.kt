@@ -3,6 +3,7 @@ package com.example.desafio_android_samuel_ramos.persistence
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.desafio_android_samuel_ramos.factory.BufferFactory
+import kotlinx.coroutines.runBlocking
 import org.hamcrest.CoreMatchers.`is`
 import org.junit.Before
 import org.junit.Test
@@ -19,7 +20,7 @@ class CharacterDaoTest : AppDatabaseTest() {
     }
 
     @Test
-    fun characterDao_insertCharacter() {
+    fun characterDao_insertCharacter() = runBlocking {
 
         val cachedCharacter = BufferFactory.makeCachedCharacter()
         characterDao.insertCharacterList(cachedCharacter)

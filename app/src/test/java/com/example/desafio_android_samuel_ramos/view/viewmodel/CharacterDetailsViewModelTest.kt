@@ -1,11 +1,12 @@
 package com.example.desafio_android_samuel_ramos.view.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.desafio_android_samuel_ramos.base.LiveDataFetch
 import com.example.desafio_android_samuel_ramos.repository.DetailRepository
 import com.example.desafio_android_samuel_ramos.utils.MockTestUtil.mockDetails
-import io.mockk.every
+import io.mockk.coEvery
 import io.mockk.mockk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Before
@@ -25,6 +26,7 @@ class CharacterDetailsViewModelTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
+    private val mDispatcher = Dispatchers.Unconfined
     private lateinit var sut: CharacterDetailsViewModel
     private val mDetailRepository = mockk<DetailRepository>(relaxed = true)
 
@@ -38,10 +40,10 @@ class CharacterDetailsViewModelTest {
     }
 
     @Test
-    fun `characterDetailsViewModel fetchData`() {
+    fun `characterDetailsViewModel fetchData`() = runBlocking {
 
-        every { mDetailRepository.getCharacterById(1011334) } returns mockDetails()
-        sut = CharacterDetailsViewModel(mDetailRepository)
+        coEvery { mDetailRepository.getCharacterById(1011334) } returns mockDetails()
+        sut = CharacterDetailsViewModel(mDispatcher, mDispatcher, mDetailRepository)
 
         sut.mDetailResponse.observeForever { }
         sut.fetchData(1011334)

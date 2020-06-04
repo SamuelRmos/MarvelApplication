@@ -19,9 +19,11 @@ import com.example.desafio_android_samuel_ramos.view.viewmodel.ComicViewModel
 class ComicFragment : Fragment() {
 
     private lateinit var viewModel: ComicViewModel
+    private lateinit var binding: ComicFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val characterViewModelFactory = CharacterViewModelFactory()
         viewModel = ViewModelProvider(this, characterViewModelFactory)
             .get(ComicViewModel::class.java)
@@ -32,20 +34,21 @@ class ComicFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = ComicFragmentBinding.inflate(inflater, container, false)
+
+        binding = ComicFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        subscribeUi(binding)
+        subscribeUi()
         return binding.root
     }
 
-    private fun subscribeUi(binding: ComicFragmentBinding) {
+    private fun subscribeUi() {
         viewModel.fetchComics()
         viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
-            bind(binding, it)
+            bind(it)
         })
     }
 
-    private fun bind(binding: ComicFragmentBinding, item: Comic) {
+    private fun bind(item: Comic) {
         binding.apply {
             comic = item
             executePendingBindings()

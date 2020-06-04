@@ -14,8 +14,8 @@ class CharacterRepository constructor(private val characterDao: CharacterDao) : 
     private val characterList = characterDao.getCharacterList()
 
     suspend fun getCharacter() = when {
-        characterList.isEmpty() || characterList.size == 0 -> dataFetchLogic()
 
+        characterList.isEmpty() || characterList.size == 0 -> dataFetchLogic()
         else -> characterDao.getCharacterList()
     }
 

@@ -14,7 +14,7 @@ interface CharacterDao {
     fun insertCharacterList(characters: MutableList<Characters>?)
 
     @Query("SELECT * FROM Characters WHERE id = :id_")
-    fun getCharacter(id_: Int): Characters
+    suspend fun getCharacter(id_: Int): Characters
 
     @Query("SELECT * FROM Characters")
     fun getCharacterList(): MutableList<Characters>

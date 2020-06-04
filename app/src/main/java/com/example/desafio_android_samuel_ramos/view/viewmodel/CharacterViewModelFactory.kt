@@ -21,7 +21,7 @@ class CharacterViewModelFactory : ViewModelProvider.Factory, KoinComponent {
                 CharacterViewModel(Dispatchers.Main, Dispatchers.IO, characterRepository) as T
             }
             modelClass.isAssignableFrom(CharacterDetailsViewModel::class.java) -> {
-                CharacterDetailsViewModel(detailRepository) as T
+                CharacterDetailsViewModel(Dispatchers.Main, Dispatchers.IO, detailRepository) as T
             }
             modelClass.isAssignableFrom(ComicViewModel::class.java) -> {
                 ComicViewModel(characterRepository) as T
