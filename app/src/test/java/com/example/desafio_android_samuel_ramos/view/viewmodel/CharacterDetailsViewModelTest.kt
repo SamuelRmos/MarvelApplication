@@ -49,13 +49,12 @@ class CharacterDetailsViewModelTest {
         sut.fetchData(1011334)
 
         assert(sut.mDetailResponse.value != null)
-        assert(sut.mDetailResponse.value!!.responseStatus == LiveDataFetch.ResponseStatus.SUCCESS)
 
         val receivedData = sut.mDetailResponse.value
 
         assertNotNull(receivedData)
-        assertEquals(receivedData?.response?.value?.id, mId)
-        assertEquals(receivedData?.response?.value?.name, mName)
+        assertEquals(receivedData?.id, mId)
+        assertEquals(receivedData?.name, mName)
     }
 
     // region helper methods

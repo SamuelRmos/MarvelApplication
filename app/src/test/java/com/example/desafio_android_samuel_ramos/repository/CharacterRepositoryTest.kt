@@ -31,19 +31,21 @@ class CharacterRepositoryTest : BaseTest() {
     private val mName = "3-D Man"
     private val mDescription = ""
 
+    private val mTitle = "Hulk (2008) #55"
+    private val description = "The hands of the doomsday clock race towards MAYAN RULE! Former Avengers arrive to help stop the end of the world as more Mayan gods return. Rick \"A-Bomb\" Jones falls in battle!"
+
     // end region helper fields
 
     @Before
     fun setup() {
         super.setUp()
         startKoin { modules(configureTestAppComponent(getMockWebServerUrl())) }
-
     }
 
     @Test
-    fun `characterRepo retrieveData`() = runBlocking {
-        mockNetworkResponseWithFileContent("data_list", HttpURLConnection.HTTP_OK)
+    fun `characterRepo characterApi retrieveData`() = runBlocking {
 
+        mockNetworkResponseWithFileContent("data_list", HttpURLConnection.HTTP_OK)
         every { characterDao.getCharacterList() } returns mutableListOf()
 
         sut = CharacterRepository(characterDao)
@@ -53,6 +55,20 @@ class CharacterRepositoryTest : BaseTest() {
         assertEquals(dataReceived[0].id, mId)
         assertEquals(dataReceived[0].name, mName)
         assertEquals(dataReceived[0].description, mDescription)
+    }
+
+    @Test
+    fun `characterRepo comicApi retrieveData`() = runBlocking {
+
+        mockNetworkResponseWithFileContent("comic_list", HttpURLConnection.HTTP_OK)
+        every { characterDao.getCharacterList() } returns mutableListOf()
+
+        sut = CharacterRepository(characterDao)
+        val dataReceived = sut.getComics()
+
+        assertNotNull(dataReceived)
+        assertEquals(dataReceived[0].title, mTitle)
+        assertEquals(dataReceived[0].description, description)
     }
 
     // region helper methods

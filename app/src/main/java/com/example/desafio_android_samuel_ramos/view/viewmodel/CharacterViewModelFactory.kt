@@ -24,7 +24,7 @@ class CharacterViewModelFactory : ViewModelProvider.Factory, KoinComponent {
                 CharacterDetailsViewModel(Dispatchers.Main, Dispatchers.IO, detailRepository) as T
             }
             modelClass.isAssignableFrom(ComicViewModel::class.java) -> {
-                ComicViewModel(characterRepository) as T
+                ComicViewModel(Dispatchers.Main, Dispatchers.IO, characterRepository) as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class")
         }

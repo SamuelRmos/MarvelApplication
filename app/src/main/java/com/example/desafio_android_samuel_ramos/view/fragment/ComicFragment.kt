@@ -37,16 +37,16 @@ class ComicFragment : Fragment() {
 
         binding = ComicFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
-        subscribeUi()
+//        subscribeUi()
         return binding.root
     }
 
-    private fun subscribeUi() {
-        viewModel.fetchComics()
-        viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
-            bind(it)
-        })
-    }
+//    private fun subscribeUi() {
+//        viewModel.fetchComics()
+//        viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
+//            bind(it)
+//        })
+//    }
 
     private fun bind(item: Comic) {
         binding.apply {

@@ -34,7 +34,7 @@ class CharacterRepository constructor(private val characterDao: CharacterDao) : 
         return dataReceived
     }
 
-    suspend fun getComics(): MutableList<Comics>? {
+    suspend fun getComics(): MutableList<Comics> {
 
         val comicResponse = safeApiCall(
             call = {
@@ -42,6 +42,7 @@ class CharacterRepository constructor(private val characterDao: CharacterDao) : 
             },
             errorMessage = "Error Fetching Characters Response"
         )
+
         return comicResponse!!.data.results.toMutableList()
     }
 }
