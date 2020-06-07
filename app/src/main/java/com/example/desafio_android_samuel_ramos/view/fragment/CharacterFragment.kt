@@ -11,14 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.desafio_android_samuel_ramos.base.LiveDataWrapper
-import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModel
 import com.example.desafio_android_samuel_ramos.databinding.CharacterFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
 import com.example.desafio_android_samuel_ramos.extensions.show
+import com.example.desafio_android_samuel_ramos.extensions.waitForTransition
 import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.view.adapter.CharacterAdapter
+import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModel
 import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
-import kotlinx.coroutines.Dispatchers
 
 class CharacterFragment : Fragment() {
 
@@ -36,18 +36,20 @@ class CharacterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        mCharacterAdapter = CharacterAdapter(requireActivity(), arrayListOf())
         binding = CharacterFragmentBinding.inflate(
             inflater,
             container,
             false
         )
-        context ?: return binding.root
-
-        binding.recyclerView.adapter = mCharacterAdapter
         setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mCharacterAdapter = CharacterAdapter(requireActivity(), arrayListOf())
+        binding.recyclerView.adapter = mCharacterAdapter
+        waitForTransition(binding.recyclerView)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

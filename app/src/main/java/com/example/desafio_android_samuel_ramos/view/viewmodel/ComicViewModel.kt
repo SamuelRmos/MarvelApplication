@@ -37,6 +37,7 @@ class ComicViewModel(
                         val dataResult = dataComic(data)
                         mComicLiveData.value = dataResult
                     } catch (e: Exception) {
+
                     }
                     setLoadingVisibility(false)
                 } catch (e: Exception) {
@@ -47,26 +48,15 @@ class ComicViewModel(
     }
 
     private fun dataComic(comics: MutableList<Comics>): Comic {
-
-        var price = 0.00F
-        if (comics.size != 0) {
-            for (item in comics) {
-                for (element in item.prices) {
-                    if (element.price >= price) {
-                        price = element.price
-                        setComic(item, price)
-                    }
-                }
-            }
-        }
+        setComic(comics.maxBy { it.prices[0].price })
         return mComic
     }
 
-    private fun setComic(comics: Comics, price: Float) {
+    private fun setComic(comics: Comics?) {
         mComic = Comic(
-            title = comics.title,
+            title = comics!!.title,
             description = comics.description,
-            prices = price.toString(),
+            prices = comics.prices[0].price.toString(),
             thumbnail = comics.thumbnail
         )
     }
@@ -74,12 +64,4 @@ class ComicViewModel(
     private fun setLoadingVisibility(visible: Boolean) {
         mLoadingLiveData.postValue(visible)
     }
-
-//    fun createOnClickListener(): View.OnClickListener {
-//        return View.OnClickListener {
-//            it.findNavController().navigate(
-//                ComicFragmentDirections.actionComicFragmentToCharacterFragment()
-//            )
-//        }
-//    }
 }

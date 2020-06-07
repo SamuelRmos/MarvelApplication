@@ -12,11 +12,7 @@
         tools:layout="@layout/character_fragment">
         <action
             android:id="@+id/action_characterFragment_to_characterDetailsFragment"
-            app:destination="@id/characterDetailsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:destination="@id/characterDetailsFragment" />
     </fragment>
 
     <fragment
@@ -26,14 +22,10 @@
         tools:layout="@layout/character_details_fragment">
         <action
             android:id="@+id/action_characterDetailsFragment_to_characterFragment"
-            app:destination="@id/characterFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left" />
+            app:destination="@id/characterFragment" />
         <argument
-            android:name="characterId"
-            app:argType="integer"/>
+            android:name="character"
+            app:argType="com.example.desafio_android_samuel_ramos.model.Characters" />
         <action
             android:id="@+id/action_characterDetailsFragment_to_comicFragment"
             app:destination="@id/comicFragment"
@@ -60,5 +52,5 @@
         android:id="@+id/splashActivity"
         android:name="com.example.desafio_android_samuel_ramos.view.activity.SplashActivity"
         android:label="SplashActivity"
-        tools:layout="@layout/splash_activity"/>
+        tools:layout="@layout/splash_activity" />
 </navigation>

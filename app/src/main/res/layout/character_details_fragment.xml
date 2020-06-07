@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="clickListener"
             type="android.view.View.OnClickListener" />
@@ -12,82 +14,77 @@
             type="com.example.desafio_android_samuel_ramos.model.Characters" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivcharacterdetails"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="1:.85"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:loadWide="@{character}" />
-
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvcharactername"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:gravity="center"
-            android:text="@{character.name}"
-            android:textColor="@color/colorText"
-            android:textSize="17sp"
-            app:fontFamily="@font/roboto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivcharacterdetails" />
+            android:background="@color/colorPrimary">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvdescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:gravity="center"
-            android:maxLines="3"
-            android:text="@{character.description}"
-            android:textColor="@color/colorText"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvcharactername" />
+            <ImageView
+                android:id="@+id/iv_character"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:transitionName="@{@string/transition_character(character.id)}"
+                app:layout_constraintDimensionRatio="1:.85"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:loadWide="@{character}"
+                tools:src="@drawable/not_picture"
+                tools:ignore="ContentDescription" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnHQ"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:fontFamily="@font/roboto"
-            android:onClick="@{clickListener}"
-            android:text="@string/see_hqs"
-            android:visibility="gone"
-            app:backgroundTint="@color/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvdescription"
-            app:layout_constraintVertical_bias="0.765" />
+            <TextView
+                android:id="@+id/tv_character_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:text="@{character.name}"
+                android:textColor="@color/colorText"
+                android:textSize="17sp"
+                android:transitionName="@{@string/transition_name(character.id)}"
+                app:fontFamily="@font/roboto"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_character" />
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="300dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:indeterminateOnly="true"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.495"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvdescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:maxLines="3"
+                android:text="@{character.description}"
+                android:textColor="@color/colorText"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_character_name"
+                tools:text="Description not available"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnHQ"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/roboto"
+                android:onClick="@{clickListener}"
+                android:text="@string/see_hqs"
+                android:visibility="gone"
+                app:backgroundTint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.495"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvdescription"
+                app:layout_constraintVertical_bias="0.765" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

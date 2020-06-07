@@ -32,33 +32,39 @@
             android:orientation="vertical"
             tools:ignore="UnusedAttribute">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivCharacter"
+            <ImageView
+                android:id="@+id/iv_character"
                 android:layout_width="match_parent"
                 android:layout_height="220dp"
-                app:loadPicture="@{character}"
+                android:transitionName="@{@string/transition_character(character.id)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.2" />
+                app:layout_constraintVertical_bias="0.2"
+                app:loadWide="@{character}"
+                tools:ignore="ContentDescription" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvName"
+            <TextView
+                android:id="@+id/tv_character_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="8dp"
+                android:ellipsize="end"
                 android:gravity="center"
                 android:text="@{character.name}"
-                android:textSize="20sp"
                 android:textColor="@color/colorText"
+                android:textSize="20sp"
+                android:transitionName="@{@string/transition_name(character.id)}"
                 app:fontFamily="@font/roboto"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivCharacter"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_character"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Name"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

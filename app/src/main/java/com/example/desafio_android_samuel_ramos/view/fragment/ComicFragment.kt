@@ -13,19 +13,17 @@ import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
 import com.example.desafio_android_samuel_ramos.extensions.show
 import com.example.desafio_android_samuel_ramos.model.Comic
+import com.example.desafio_android_samuel_ramos.util.messageError
 import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
 import com.example.desafio_android_samuel_ramos.view.viewmodel.ComicViewModel
 
 class ComicFragment : Fragment() {
 
-    private lateinit var viewModel: ComicViewModel
+    private val characterViewModelFactory = CharacterViewModelFactory()
     private lateinit var binding: ComicFragmentBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val characterViewModelFactory = CharacterViewModelFactory()
-        viewModel = ViewModelProvider(this, characterViewModelFactory)
+    private val mViewModel: ComicViewModel by lazy {
+        ViewModelProvider(this, characterViewModelFactory)
             .get(ComicViewModel::class.java)
     }
 
@@ -37,31 +35,46 @@ class ComicFragment : Fragment() {
 
         binding = ComicFragmentBinding.inflate(inflater, container, false)
         context ?: return binding.root
-//        subscribeUi()
+        processData()
         return binding.root
     }
 
-//    private fun subscribeUi() {
-//        viewModel.fetchComics()
-//        viewModel.comicLiveData.observe(viewLifecycleOwner, Observer {
-//            bind(it)
-//        })
-//    }
+    private fun processData() {
+
+        mViewModel.fetchComics()
+
+        mViewModel.mComicLiveData.observe(viewLifecycleOwner, Observer { item ->
+            when (item) {
+                null -> Toast.makeText(activity, messageError, Toast.LENGTH_SHORT).show()
+                else -> bind(item)
+            }
+        })
+        mViewModel.mLoadingLiveData.observe(viewLifecycleOwner, loadingObserver)
+    }
 
     private fun bind(item: Comic) {
         binding.apply {
             comic = item
             executePendingBindings()
         }
-        binding.progressBar.hide()
-        binding.tvprice.show()
+    }
+
+    private val loadingObserver = Observer<Boolean> { visible ->
+        when {
+            visible -> binding.progressBar.show()
+            else -> {
+                binding.progressBar.hide()
+                binding.tvprice.show()
+            }
+        }
     }
 
     private fun backToDetails() {
         findNavController().navigate(
             ComicFragmentDirections.actionComicFragmentToCharacterFragment()
         )
-        Toast.makeText (activity,
+        Toast.makeText(
+            activity,
             "Don't exist comics to the character!",
             Toast.LENGTH_LONG
         ).show()

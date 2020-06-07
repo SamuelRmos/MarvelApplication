@@ -3,7 +3,6 @@ package com.example.desafio_android_samuel_ramos.extensions
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
 
 fun ProgressBar.hide(){
@@ -21,3 +20,5 @@ fun MaterialButton.show(){
 fun TextView.show(){
     visibility = View.VISIBLE
 }
+
+fun View.toTransitionGroup() = this to transitionName
