@@ -15,5 +15,8 @@ Android Material Design;</br>
 Espresso;</br>
 MockK.</br>
 
-- Para compilar o projeto deve-se adicionar os valores "ts", "apikey" e "hash" no arquivo local.properties na pasta Gradle Scripts para consumir a API.
+- Para compilar o projeto deve-se adicionar os valores "ts", "apikey" e "hash" no arquivo local.properties na pasta Gradle Scripts para consumir a API. </br>
 
+# Screenshot
+
+<img src="https://media.giphy.com/media/IdCp6UsWtRbaxmK9AP/giphy.gif" width="270" height="480" />
