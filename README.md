@@ -21,5 +21,5 @@ MockK.</br>
 
 # Screenshot
 <p align="center">
-<img src="https://media.giphy.com/media/Qx43dZXHB7QGvuBh0m/giphy.gif" width="270" height="480" />
+<img src="https://media.giphy.com/media/Qx43dZXHB7QGvuBh0m/giphy.gif" />
 <//p>
