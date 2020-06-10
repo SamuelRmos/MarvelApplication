@@ -9,7 +9,7 @@ Navigation Components;</br>
 View Binding;</br>
 Data Binding;</br>
 Retrofit2;</br>
-Koin;</br>
+Dependency Injection (Koin);</br>
 Glide;</br>
 Moshi;</br>
 Kotlin Coroutine;</br>
