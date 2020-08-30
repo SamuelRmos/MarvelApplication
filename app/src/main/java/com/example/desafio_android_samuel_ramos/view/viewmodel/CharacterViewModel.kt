@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.desafio_android_samuel_ramos.base.LiveDataWrapper
 import com.example.desafio_android_samuel_ramos.model.Characters
-import com.example.desafio_android_samuel_ramos.model.DataResponse
 import com.example.desafio_android_samuel_ramos.repository.CharacterRepository
 import kotlinx.coroutines.*
 
@@ -26,8 +25,7 @@ class CharacterViewModel(
         if (mCharacterResponse.value == null) {
 
             mUiScope.launch {
-
-                mCharacterResponse.value = LiveDataWrapper.loading()
+                mCharacterResponse.postValue(LiveDataWrapper.loading())
                 setLoadingVisibility(true)
 
                 try {
@@ -36,13 +34,13 @@ class CharacterViewModel(
                     }.await()
 
                     try {
-                        mCharacterResponse.value = LiveDataWrapper.success(data)
+                        mCharacterResponse.postValue(LiveDataWrapper.success(data))
                     } catch (e: Exception) {
                     }
                     setLoadingVisibility(false)
                 } catch (e: Exception) {
                     setLoadingVisibility(false)
-                    mCharacterResponse.value = LiveDataWrapper.error(e)
+                    mCharacterResponse.postValue(LiveDataWrapper.error(e))
                 }
             }
         }

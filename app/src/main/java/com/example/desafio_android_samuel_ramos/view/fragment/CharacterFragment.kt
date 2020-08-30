@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.example.desafio_android_samuel_ramos.base.LiveDataWrapper
 import com.example.desafio_android_samuel_ramos.databinding.CharacterFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
@@ -18,18 +17,13 @@ import com.example.desafio_android_samuel_ramos.extensions.waitForTransition
 import com.example.desafio_android_samuel_ramos.model.Characters
 import com.example.desafio_android_samuel_ramos.view.adapter.CharacterAdapter
 import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModel
-import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharacterFragment : Fragment() {
 
-    private val mViewModelFactory = CharacterViewModelFactory()
     private lateinit var mCharacterAdapter: CharacterAdapter
     private lateinit var binding: CharacterFragmentBinding
-
-    private val mViewModel: CharacterViewModel by lazy {
-        ViewModelProvider(this, mViewModelFactory)
-            .get(CharacterViewModel::class.java)
-    }
+    private val mViewModel  by viewModel<CharacterViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

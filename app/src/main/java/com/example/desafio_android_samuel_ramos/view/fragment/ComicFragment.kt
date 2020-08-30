@@ -7,25 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.desafio_android_samuel_ramos.databinding.ComicFragmentBinding
 import com.example.desafio_android_samuel_ramos.extensions.hide
 import com.example.desafio_android_samuel_ramos.extensions.show
 import com.example.desafio_android_samuel_ramos.model.Comic
 import com.example.desafio_android_samuel_ramos.util.messageError
-import com.example.desafio_android_samuel_ramos.view.viewmodel.CharacterViewModelFactory
 import com.example.desafio_android_samuel_ramos.view.viewmodel.ComicViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ComicFragment : Fragment() {
-
-    private val characterViewModelFactory = CharacterViewModelFactory()
     private lateinit var binding: ComicFragmentBinding
-
-    private val mViewModel: ComicViewModel by lazy {
-        ViewModelProvider(this, characterViewModelFactory)
-            .get(ComicViewModel::class.java)
-    }
+    private val mViewModel by viewModel<ComicViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -35,7 +35,7 @@ class ComicViewModel(
 
                     try {
                         val dataResult = dataComic(data)
-                        mComicLiveData.value = dataResult
+                        mComicLiveData.postValue(dataResult)
                     } catch (e: Exception) {
 
                     }

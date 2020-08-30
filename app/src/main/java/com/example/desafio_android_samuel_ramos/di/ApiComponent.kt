@@ -1,4 +1,8 @@
 package com.example.desafio_android_samuel_ramos.di
 
-val appComponent =
-    listOf(ApiModule, AppModule, PersistenceModule, CharacterModule)
+val appComponent = listOf(
+    ApiModule,
+    AppModule,
+    PersistenceModule,
+    CharacterModule
+)
